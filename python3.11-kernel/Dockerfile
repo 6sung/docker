@@ -39,7 +39,7 @@ RUN pip install --upgrade pip && pip install \
     prometheus-client==0.19.0 \
 
 # Python 3.11을 Jupyter 커널로 등록
-RUN python -m ipykernel install --user --name py311 --display-name "Python 3.11"
+RUN python -m ipykernel install --name py311 --display-name "Python 3.11"
 
 # 기본 셸 설정
 CMD ["/bin/bash"]
