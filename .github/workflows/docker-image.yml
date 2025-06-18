@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - main  # 또는 master, 원하는 브랜치
+      - main  # main 브랜치 푸시 시 실행
 
 jobs:
   build:
@@ -25,6 +25,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./docker/python3.11-kernel
+          context: ./python3.11-kernel  # ✅ 여기 수정
           push: true
           tags: 6loki6/python3.11-jupyter-kernel:latest
