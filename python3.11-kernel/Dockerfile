@@ -1,19 +1,17 @@
 FROM python:3.11-slim
 
-# 시스템 의존 패키지 설치
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git \
+    libssl-dev \
+    libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 작업 디렉토리 생성
 WORKDIR /workspace
 
-# pip 최신화 및 필수 패키지 설치 (버전 고정)
 RUN pip install --upgrade pip && pip install \
     ipykernel \
-    jupyterlab \
     fastapi==0.104.1 \
     uvicorn[standard]==0.24.0 \
     gunicorn==21.2.0 \
@@ -36,10 +34,8 @@ RUN pip install --upgrade pip && pip install \
     mypy==1.7.1 \
     pre-commit==3.6.0 \
     sentry-sdk[fastapi]==1.38.0 \
-    prometheus-client==0.19.0 \
+    prometheus-client==0.19.0
 
-# Python 3.11을 Jupyter 커널로 등록
 RUN python -m ipykernel install --name py311 --display-name "Python 3.11"
 
-# 기본 셸 설정
 CMD ["/bin/bash"]
