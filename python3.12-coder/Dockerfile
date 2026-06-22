@@ -1,3 +1,7 @@
+FROM python:3.12-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Python 패키지 
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \ 
