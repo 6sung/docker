@@ -139,18 +139,6 @@ RUN pip install --no-cache-dir \
     mypy \
     pre-commit
 
-# ─── 설치 경로 검증 ──────────────────────────────────────────────────────────
-# pip install 후 /usr/local/bin/jupyter 에 생성됨
-# python:3.12-slim 은 /usr/local/bin 이 기본 PATH에 포함되어 있어
-# code-server처럼 별도 심볼릭 링크가 불필요하지만, 아래에서 확인 후 고정
-RUN JUPYTER_BIN="$(which jupyter)" \
-  && echo ">>> jupyter binary  : $JUPYTER_BIN" \
-  && echo ">>> jupyter version : $(jupyter --version)" \
-  && echo ">>> jupyterlab      : $(jupyter lab --version)" \
-  # 절대 경로 심볼릭 링크 고정 (/usr/local/bin/jupyter 가 이미 존재해도 덮어씀)
-  && ln -sf "$JUPYTER_BIN" /usr/local/bin/jupyter \
-  && echo ">>> symlink OK      : $(ls -la /usr/local/bin/jupyter)"
-
 # ─── ipykernel 등록 ──────────────────────────────────────────────────────────
 RUN python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3.12"
 
