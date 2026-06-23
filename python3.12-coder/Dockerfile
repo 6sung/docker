@@ -184,10 +184,4 @@ EXPOSE 8080
 # dumb-init: 컨테이너 PID 1로 실행 → SIGTERM 정상 전달 및 좀비 프로세스 방지
 # 절대 경로 사용 → RunContainerError(executable not found in PATH) 방지
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD [
-  "/usr/local/bin/code-server",
-  "--bind-addr", "0.0.0.0:8080",
-  "--user-data-dir", "/workspace/.vscode-data",
-  "--extensions-dir", "/workspace/.vscode-extensions",
-  "/workspace"
-]
+CMD ["/usr/local/bin/code-server", "--bind-addr", "0.0.0.0:8080", "--user-data-dir", "/workspace/.vscode-data", "--extensions-dir", "/workspace/.vscode-extensions", "/workspace"]
